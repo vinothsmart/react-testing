@@ -1,13 +1,12 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-function UserForm() {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+function UserForm({ addUser }) {
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log(name, email);
+    addUser({ name, email });
   };
 
   return (
