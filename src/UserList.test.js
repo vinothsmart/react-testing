@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { getByRole, render, screen, within } from "@testing-library/react";
 import UserList from "./UserList";
 
 test("render one row for each user", () => {
@@ -16,4 +16,20 @@ test("render one row for each user", () => {
   expect(rows).toHaveLength(2);
 });
 
-test("render the email and name of each user", () => {});
+test("render the email and name of each user", () => {
+  // render the component
+  const users = [
+    { id: 1, name: "jane", email: "jane@jane.com" },
+    { id: 2, name: "sam", email: "sam@sam.com" },
+  ];
+  render(<UserList users={users} />);
+
+  //   screen.logTestingPlaygroundURL();
+  for (let user of users) {
+    const name = screen.getByRole("cell", { name: user.name });
+    const email = screen.getByRole("cell", { name: user.email });
+
+    expect(name).toBeInTheDocument();
+    expect(email).toBeInTheDocument();
+  }
+});
