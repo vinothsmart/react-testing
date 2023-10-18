@@ -7,6 +7,8 @@ function UserForm({ addUser }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     addUser({ name, email });
+    setEmail("");
+    setName("");
   };
 
   return (
