@@ -14,11 +14,13 @@ test("render one row for each user", () => {
   //   screen.logTestingPlaygroundURL();
   //   const rows = screen.getAllByRole("row");
   //   const rows = within(screen.getByTestId("users")).getAllByRole("row");
-  const table = container.querySelector("table");
-  console.log(table);
+  //   const table = container.querySelector("table");
+  //   console.log(table);
+  // eslint-disable-next-line
+  const rows = container.querySelectorAll("tbody  tr");
 
   // Assertion: correct number of rows in the table
-  //   expect(rows).toHaveLength(2);
+  expect(rows).toHaveLength(2);
 });
 
 test("render the email and name of each user", () => {});
