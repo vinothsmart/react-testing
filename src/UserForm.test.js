@@ -16,16 +16,13 @@ test("it shows two inputs and a button", () => {
 });
 
 test("it calls onUserAdd when the form is submitted", async () => {
-  // NOT THE BEST IMPLEMENTATION
-  const aragList = [];
-  const callback = (...args) => {
-    aragList.push(args);
-  };
+  const mock = jest.fn();
   // Try to render my component
-  render(<UserForm addUser={callback} />);
+  render(<UserForm addUser={mock} />);
 
   // Find the two inputs
-  const [nameInput, emailInput] = screen.getAllByRole("textbox");
+  const nameInput = screen.getByRole("textbox", { name: /name/i });
+  const emailInput = screen.getByRole("textbox", { name: /email/i });
 
   // Simulate typing in a name
   await user.click(nameInput);
@@ -42,6 +39,6 @@ test("it calls onUserAdd when the form is submitted", async () => {
   await user.click(button);
 
   // Assertion to make sure 'onUserAdd' gets called with email/name
-  expect(aragList).toHaveLength(1);
-  expect(aragList[0][0]).toEqual({ name: "jane", email: "jane@jane.com" });
+  expect(mock).toHaveBeenCalled();
+  expect(mock).toHaveBeenCalledWith({ name: "jane", email: "jane@jane.com" });
 });
