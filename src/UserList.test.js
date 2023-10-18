@@ -7,17 +7,10 @@ test("render one row for each user", () => {
     { id: 1, name: "jane", email: "jane@jane.com" },
     { id: 2, name: "sam", email: "sam@sam.com" },
   ];
-  //   render(<UserList users={users} />);
-  const { container } = render(<UserList users={users} />);
+  render(<UserList users={users} />);
 
   // Find all the rows in the table
-  //   screen.logTestingPlaygroundURL();
-  //   const rows = screen.getAllByRole("row");
-  //   const rows = within(screen.getByTestId("users")).getAllByRole("row");
-  //   const table = container.querySelector("table");
-  //   console.log(table);
-  // eslint-disable-next-line
-  const rows = container.querySelectorAll("tbody  tr");
+  const rows = within(screen.getByTestId("users")).getAllByRole("row");
 
   // Assertion: correct number of rows in the table
   expect(rows).toHaveLength(2);
