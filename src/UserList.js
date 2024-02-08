@@ -1,11 +1,6 @@
-const UserList = ({ users }) => {
-  const rendredUsers = users.map((user) => (
-    <tr key={user.name}>
-      <td>{user.name}</td>
-      <td>{user.email}</td>
-    </tr>
-  ));
+import User from "./User";
 
+const UserList = ({ users }) => {
   return (
     <table>
       <thead>
@@ -14,7 +9,9 @@ const UserList = ({ users }) => {
           <th>Email</th>
         </tr>
       </thead>
-      <tbody data-testid="users">{rendredUsers}</tbody>
+      <tbody data-testid="users">
+        <User users={users} />
+      </tbody>
     </table>
   );
 };
