@@ -1,33 +1,31 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 function UserForm({ addUser }) {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [values, setValues] = useState({ name: "", email: "" });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    addUser({ name, email });
-    setEmail("");
-    setName("");
-  };
+  const handleChange = useCallback((e) => {
+    const { id, value } = e.target;
+    setValues((prevValues) => ({ ...prevValues, [id]: value }));
+  }, []);
+
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      addUser({ ...values });
+      setValues({ name: "", email: "" });
+    },
+    [values, addUser]
+  );
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="name">Name</label>
-        <input
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <input id="name" value={values.name} onChange={handleChange} />
       </div>
       <div>
         <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <input id="email" value={values.email} onChange={handleChange} />
       </div>
       <button>Add User</button>
     </form>
